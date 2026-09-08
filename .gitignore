@@ -1,0 +1,29 @@
+# --- raw downloads (re-fetched from PEGELONLINE, ~80-day window, large) ---
+raw/
+
+# --- big output file: ~100 MB and grows daily -> not committed.
+#     The README explains what a run produces; pegel.parquet (small,
+#     with coordinates) IS committed as the gauge reference table.
+data/wasserstand.parquet
+
+# --- scheduled-run logs ---
+logs/
+
+# --- secrets ---
+.env
+
+# --- python junk ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- editor / OS junk ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Power BI temp / recovery files (keep the .pbix itself) ---
+*.pbix.tmp
+~$*
