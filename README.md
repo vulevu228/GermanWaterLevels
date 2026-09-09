@@ -9,6 +9,18 @@ und Diagramme bauen.
 Die Werte sind Wasserstände in **Zentimeter über dem Pegelnullpunkt (PNP)**. Es
 gibt für die meisten Pegel alle 15 Minuten einen Wert.
 
+## Vorschau
+
+Der Power-BI-Report zeigt alle Pegel auf einer Deutschland-Karte, den zeitlichen
+Verlauf und den Vergleich der mittleren Wasserstände je Station. Über die
+Auswahl links lässt sich auf ein einzelnes Gewässer oder eine Station filtern.
+
+![Power-BI-Report: alle Pegel in Deutschland](docs/dashboard-deutschland.png)
+
+Gefiltert auf den **Rhein** (Station Rheinweiler):
+
+![Power-BI-Report: auf den Rhein gefiltert](docs/dashboard-rhein.png)
+
 ## Was das Projekt macht
 
 1. Es liest die Ordner-Struktur auf der Webseite von PEGELONLINE.
@@ -166,7 +178,7 @@ Get-ScheduledTaskInfo -TaskName "GermanWaterLevels-daily"
 
 ## Karte und Report in Power BI
 
-Der Power-BI-Report (`pegelstaende-DE.pbix`) ist noch in Arbeit. Der Plan:
+Ein erster Power-BI-Report steht (siehe [Vorschau](#vorschau)). Aufbau:
 
 - **Power Query** lädt beide Parquet-Dateien.
 - **Stern-Schema:** `pegel.parquet` ist die Pegel-Tabelle, dazu eine
