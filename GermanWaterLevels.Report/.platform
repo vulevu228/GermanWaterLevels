@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "GermanWaterLevels"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3aa10645-0708-458d-a5ff-1fbd355e2801"
+  }
+}

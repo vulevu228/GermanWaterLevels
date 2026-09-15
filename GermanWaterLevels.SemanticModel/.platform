@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "GermanWaterLevels"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3ec3d7c8-495c-43be-88a1-567f0d8773a6"
+  }
+}

@@ -1,0 +1,115 @@
+table pegel
+	lineageTag: 43a20998-c6ee-4519-83c2-c12bfa662eb1
+
+	measure 'Active Stations' = DISTINCTCOUNT(pegel[station_no])
+		formatString: #,##0
+		lineageTag: dbc0ac63-5b89-440c-8f35-971729c98abd
+
+	column station_no
+		dataType: string
+		lineageTag: ff65f68f-e884-487f-9fc4-8c12012da17f
+		summarizeBy: none
+		sourceColumn: station_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column station
+		dataType: string
+		lineageTag: 65e0c965-7546-4f05-91e5-5e45ead82c5f
+		summarizeBy: none
+		sourceColumn: station
+
+		annotation SummarizationSetBy = Automatic
+
+	column waterway
+		dataType: string
+		lineageTag: fb06b2da-cb2a-42a6-a5f6-2ee3b566cdba
+		summarizeBy: none
+		sourceColumn: waterway
+
+		annotation SummarizationSetBy = Automatic
+
+	column pegel_uuid
+		dataType: string
+		lineageTag: 0e01fd4e-ea47-4589-b742-3fd7121c8a27
+		summarizeBy: none
+		sourceColumn: pegel_uuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: string
+		lineageTag: 4648b2d4-388c-4c59-b43d-7c862821fc2c
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column pnp_m
+		dataType: double
+		lineageTag: 8ca86146-52d3-4069-909f-29d938d2ffbc
+		summarizeBy: none
+		sourceColumn: pnp_m
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column latitude
+		dataType: double
+		lineageTag: 278e7ad9-1400-4de6-b930-ac8c7fbbe78b
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: bc171742-386b-40c8-b970-58912d914799
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column river_km
+		dataType: double
+		lineageTag: 945d3592-2392-4eaa-8e45-f464517188bc
+		summarizeBy: none
+		sourceColumn: river_km
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column agency
+		dataType: string
+		lineageTag: f70e30d9-c57a-4198-ae40-7b1a85c26308
+		summarizeBy: none
+		sourceColumn: agency
+
+		annotation SummarizationSetBy = Automatic
+
+	column water
+		dataType: string
+		lineageTag: 0f0f02d0-2632-4e4e-aa15-665af84d70ef
+		summarizeBy: none
+		sourceColumn: water
+
+		annotation SummarizationSetBy = Automatic
+
+	partition pegel = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents("C:\Users\emira\Projects\GitHub-Projects\GermanWaterLevels\data\pegel.parquet"), [Compression=null, LegacyColumnNameEncoding=false, MaxDepth=null])
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

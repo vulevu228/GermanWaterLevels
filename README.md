@@ -14,8 +14,9 @@ gibt für die meisten Pegel alle 15 Minuten einen Wert.
 Der Power-BI-Report zeigt alle Pegel auf einer Deutschland-Karte, den zeitlichen
 Verlauf und den Vergleich der mittleren Wasserstände je Station. Über die
 Auswahl links lässt sich auf ein einzelnes Gewässer oder eine Station filtern.
-
-![Power-BI-Report: alle Pegel in Deutschland](docs/dashboard-deutschland.png)
+Die volle Übersichtsseite (alle Pegel, ungefiltert) steht weiter unten im
+[Vergleich](#vergleich-mensch-report-vs-claude-report) direkt neben der
+Claude-Version.
 
 Gefiltert auf den **Rhein** (Station Rheinweiler):
 
@@ -187,6 +188,46 @@ Ein erster Power-BI-Report steht (siehe [Vorschau](#vorschau)). Aufbau:
   Pegel, Farbe nach aktuellem Wasserstand.
 - **Kennzahlen (DAX):** aktueller Stand, Änderung in 24 Stunden und 7 Tagen,
   Minimum / Maximum / Mittel im gewählten Zeitraum, Anteil fehlender Werte.
+
+Neben der `.pbix` liegt seit Kurzem auch ein **Power-BI-Projekt** im Repo:
+`GermanWaterLevels.pbip` + `GermanWaterLevels.Report/` (Seiten/Diagramme als
+JSON) + `GermanWaterLevels.SemanticModel/` (Tabellen/DAX als TMDL) - textbasiert
+und direkt aus Git lesbar. Das ist die Claude-Version aus dem nächsten
+Abschnitt.
+
+## Vergleich: Mensch-Report vs. Claude-Report
+
+Der Report oben wurde von Hand in Power BI gebaut. Als Experiment habe ich
+Claude gebeten, denselben Datensatz komplett neu zu gestalten - ohne die
+alten Diagramme zu kopieren, direkt über die PBIP-Projektdateien
+(TMDL + JSON statt Klicken in der Oberfläche).
+
+|  | Mein Report | Claude-Report |
+| --- | --- | --- |
+| Hintergrund | Hellgrau/Weiß | Dunkles Neutralgrau, Karten leicht abgehoben (Drop-Shadow) |
+| Akzentfarben | Ein Petrol-Ton für fast alles | Vier Farben nach Bedeutung: Blau (Standard), Orange (Maximum), Cyan (Minimum), Gelb (Hervorhebung) |
+| Schrift | Constantia, teils kursiv, zentriert | Segoe UI durchgehend, links ausgerichtet, keine Kursivschrift |
+| Kennzahlen | `value_cm` implizit summiert (Power-BI-Standard) | Eigene DAX-Kennzahlen: aktueller Stand, Änderung zum letzten Messwert, Durchschnitt/Maximum/Minimum, Stationsanzahl |
+| Diagramme | 6, teils unterschiedlich groß angeordnet | Karte, Zeitreihe, Balken, Auswahllisten, exakt im Raster ausgerichtet |
+
+**Ehrliches Fazit:** Wie beim DWD-Projekt macht die konsequente Farblogik
+(Farbe = Bedeutung, nicht Geschmack) und das saubere Raster den
+Claude-Report leichter überwachbar auf den ersten Blick. Der Weg dorthin war
+nicht ohne Umwege - eine Kennzahl zeigte anfangs "Blank", weil die neuesten
+Messwerte im Datensatz noch keinen Wert hatten (`LASTNONBLANK` hat das
+gelöst), und ein automatisch generiertes Tabellen-Diagramm hat den Report
+einmal am Laden gehindert. Beides ist im PBIP-Verlauf sichtbar.
+
+<table>
+<tr>
+<th>Mein Report</th>
+<th>Claude-Report</th>
+</tr>
+<tr>
+<td><img src="docs/dashboard-deutschland.png" width="500"/></td>
+<td><img src="docs/dashboard-claude-overview.png" width="500"/></td>
+</tr>
+</table>
 
 ## Grenzen der Daten
 

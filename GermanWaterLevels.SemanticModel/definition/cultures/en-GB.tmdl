@@ -1,0 +1,53 @@
+cultureInfo en-GB
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "pegel.longitude": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "pegel",
+			          "ConceptualProperty": "longitude"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Longitude": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pegel.latitude": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "pegel",
+			          "ConceptualProperty": "latitude"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Latitude": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

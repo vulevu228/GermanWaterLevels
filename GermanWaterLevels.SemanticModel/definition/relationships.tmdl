@@ -1,0 +1,9 @@
+relationship 9ef2d47b-83bc-4093-aaed-9ff104e62cd4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: wasserstand.timestamp
+	toColumn: LocalDateTable_71c48d1b-308c-4efc-bad4-0fb5bb1a791b.Date
+
+relationship AutoDetected_f3e51ec5-d181-40e8-b240-60b5e8d9811e
+	fromColumn: wasserstand.station_no
+	toColumn: pegel.station_no
+

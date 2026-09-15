@@ -1,0 +1,92 @@
+table wasserstand
+	lineageTag: 3b3726e3-d526-460e-86ae-f57bd27e98f7
+
+	measure 'Latest Water Level (cm)' =
+			CALCULATE(
+			    SUM(wasserstand[value_cm]),
+			    LASTNONBLANK(wasserstand[timestamp], CALCULATE(SUM(wasserstand[value_cm])))
+			)
+		formatString: #,##0.0
+		lineageTag: c0409244-ed64-404b-868a-6f64e15e2e35
+
+	measure 'Previous Water Level (cm)' =
+			VAR MaxDate = MAX(wasserstand[timestamp])
+			VAR PrevDate =
+			    CALCULATE(
+			        MAX(wasserstand[timestamp]),
+			        FILTER(ALL(wasserstand[timestamp]), wasserstand[timestamp] < MaxDate)
+			    )
+			RETURN
+			    CALCULATE(SUM(wasserstand[value_cm]), wasserstand[timestamp] >= PrevDate, wasserstand[timestamp] < MaxDate)
+		formatString: #,##0.0
+		lineageTag: 20e30b97-db97-4ddf-ae2d-6be2cc5170d2
+
+	measure 'Water Level Change (cm)' = [Latest Water Level (cm)] - [Previous Water Level (cm)]
+		formatString: +#,##0.0;-#,##0.0;0.0
+		lineageTag: 83dc1dcf-c572-4af7-a8bd-a87961f7dff9
+
+	measure 'Average Water Level (cm)' = AVERAGE(wasserstand[value_cm])
+		formatString: #,##0.0
+		lineageTag: cd1a69a9-90bd-42ee-b275-df7e554d1520
+
+	measure 'Max Water Level (cm)' = MAX(wasserstand[value_cm])
+		formatString: #,##0.0
+		lineageTag: 19b91b53-e6c6-4fb5-bfa7-506629cbe6f5
+
+	measure 'Min Water Level (cm)' = MIN(wasserstand[value_cm])
+		formatString: #,##0.0
+		lineageTag: 59ccf117-610b-4926-b451-951bbde6a599
+
+	measure 'Absolute Water Level (m)' =
+			AVERAGEX(
+			    wasserstand,
+			    RELATED(pegel[pnp_m]) + DIVIDE(wasserstand[value_cm], 100)
+			)
+		formatString: #,##0.00
+		lineageTag: f5421b0a-1f3a-4f30-a4fa-ad4758db4f2a
+
+	column timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 73b5f766-b244-4252-84c1-e378a5b0fdaa
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		variation Variation
+			isDefault
+			relationship: 9ef2d47b-83bc-4093-aaed-9ff104e62cd4
+			defaultHierarchy: LocalDateTable_71c48d1b-308c-4efc-bad4-0fb5bb1a791b.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column station_no
+		dataType: string
+		lineageTag: 83edb299-1c1f-4527-b9d0-581ce817ab99
+		summarizeBy: none
+		sourceColumn: station_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column value_cm
+		dataType: double
+		lineageTag: 2719e80b-14cb-4916-9b8c-de3f6498bdc2
+		summarizeBy: sum
+		sourceColumn: value_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition wasserstand = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents("C:\Users\emira\Projects\GitHub-Projects\GermanWaterLevels\data\wasserstand.parquet"), [Compression=null, LegacyColumnNameEncoding=false, MaxDepth=null]),
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"timestamp", "station_no", "value_cm"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

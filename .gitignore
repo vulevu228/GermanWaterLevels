@@ -27,3 +27,10 @@ Thumbs.db
 # --- Power BI temp / recovery files (keep the .pbix itself) ---
 *.pbix.tmp
 ~$*
+
+# --- Power BI Project (.pbip) local cache & per-user settings ---
+# cache.abf is a regenerable compiled data cache (can be 100s of MB); localSettings.json
+# holds per-machine window/auth state. Neither belongs in source control.
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+**/.pbi/editorSettings.json
