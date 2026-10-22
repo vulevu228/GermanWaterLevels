@@ -130,13 +130,27 @@ def _safe(name):
     return name.strip() or "_"
 
 
+def _complete(dest, dname):
+    """True when the file on disk was downloaded after its day was over.
+
+    The 07:00 run fetches the current day's file too, and at that point only
+    the readings up to ~07:00 exist (the rest are XXX,XXX placeholders). Such a
+    copy is fetched again on later runs until one is taken at least two hours
+    after midnight, when the day is complete on the server. The file's mtime is
+    the download time, so this also repairs older partial copies for as long as
+    the server still lists their day.
+    """
+    day_end = pd.to_datetime(dname, format="%d.%m.%Y") + timedelta(days=1, hours=2)
+    return pd.Timestamp(dest.stat().st_mtime, unit="s", tz="UTC").tz_convert("Europe/Berlin").tz_localize(None) >= day_end
+
+
 def mirror(only=None):
     """Download every still-missing down.csv into raw/<waterway>/<uuid>/<day>.csv.
 
     `only` is an optional list of waterway names to restrict to (for testing).
-    Three nested loops mirror the three directory levels below ROOT. The
-    `dest.exists()` check is the whole resume mechanism: nothing is re-fetched,
-    so a daily run only pulls the one new day per gauge.
+    Three nested loops mirror the three directory levels below ROOT. A file
+    already on disk is skipped once it is complete (see _complete), so a daily
+    run pulls the new day per gauge plus yesterday's now-finished file.
     """
     RAW.mkdir(exist_ok=True)
     only = {o.upper() for o in only} if only else None
@@ -155,7 +169,7 @@ def mirror(only=None):
                 if not DAY_RE.fullmatch(dname):      # ignore anything that is not a date
                     continue
                 dest = out_dir / f"{dname}.csv"
-                if dest.exists():                    # already downloaded on an earlier run
+                if dest.exists() and _complete(dest, dname):  # final copy from an earlier run
                     n_skip += 1
                     continue
                 try:
@@ -300,8 +314,17 @@ def build():
             print("existing Parquet predates src_day - rebuilding from scratch")
             del prev
 
+    # A raw file downloaded again after the last build (a partial day re-fetched
+    # once complete) replaces the rows parsed from its earlier copy.
+    built_at = WASSERSTAND_PARQUET.stat().st_mtime if old is not None else 0
+    redo = {(f.parent.name, f.stem) for f in all_files if f.stat().st_mtime > built_at} & done
+    if redo:
+        keys = pd.MultiIndex.from_arrays([old["pegel_uuid"], old["src_day"]])  # categoricals: compares codes
+        old = old[~keys.isin(list(redo))].reset_index(drop=True)
+        done -= redo
+
     files = [f for f in all_files if (f.parent.name, f.stem) not in done]
-    print(f"{len(all_files)} raw files, {len(files)} new to parse "
+    print(f"{len(all_files)} raw files, {len(files)} new to parse, {len(redo)} of them re-downloaded "
           f"({len(all_files) - len(files)} already in Parquet)")
 
     # Parse in batches: a Python list of ~30M row tuples costs several GB, but a
