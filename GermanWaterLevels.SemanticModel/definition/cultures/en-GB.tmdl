@@ -46,6 +46,132 @@ cultureInfo en-GB
 			          }
 			        }
 			      ]
+			    },
+			    "pegel.station": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "pegel",
+			          "ConceptualProperty": "station"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Station": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "pegel.waterway": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "pegel",
+			          "ConceptualProperty": "waterway"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Waterway": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "wasserstand.max_water_level_cm": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "wasserstand",
+			          "ConceptualProperty": "Max Water Level (cm)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Peak (cm)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "wasserstand.peak_time": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "wasserstand",
+			          "ConceptualProperty": "Peak Time"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Peak time": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "wasserstand.peak_level_m_nhn": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "wasserstand",
+			          "ConceptualProperty": "Peak Level (m NHN)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Peak (m NHN)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "wasserstand.range_in_period_cm": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "wasserstand",
+			          "ConceptualProperty": "Range in Period (cm)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Range (cm)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
 			    }
 			  }
 			}

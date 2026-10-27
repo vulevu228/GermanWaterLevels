@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "1b463f34933853d508b0",
   "position": {
     "x": 16,
     "y": 90,
-    "z": 10,
+    "z": 1000,
     "height": 120,
     "width": 369.6,
-    "tabOrder": 10
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "card",

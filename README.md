@@ -110,7 +110,7 @@ Fünf Probleme, und wie das Skript sie löst:
 
 | Problem | Grund | Lösung im Skript |
 | --- | --- | --- |
-| Umlaute sehen kaputt aus (`KÃ¶ln`) | die Datei ist **Latin-1**, nicht UTF-8 | `.decode("latin-1")` |
+| Umlaute sehen kaputt aus (`MÃ¼den`) | die Datei ist **UTF-8**, wurde aber als Latin-1 gelesen | `.decode("utf-8")`, Latin-1 nur als Ersatz |
 | alles steht in einer Spalte | **Semikolon** trennt die Felder, jedes Feld hat Anführungszeichen | `csv.reader(..., delimiter=";")` |
 | `287,7` wird falsch gelesen | deutsches **Komma** ist der Dezimalpunkt, der Punkt trennt Tausender | `s.replace(".", "").replace(",", ".")` |
 | die erste Zeile hat 12 Felder, die anderen nur 2 | Zeile 1 ist eine **Kopfzeile** mit Infos zum Pegel (Nummer, Einheit, Pegelnullpunkt). Die Platzhalter `XXX,XXX` gehören zu einem Feld, das leer bleibt | Zeile 1 getrennt auswerten |

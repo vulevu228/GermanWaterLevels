@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "50178450c139017c6671",
   "position": {
     "x": 16,
     "y": 660,
-    "z": 30,
+    "z": 8000,
     "height": 404,
     "width": 618,
-    "tabOrder": 30
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -367,56 +367,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "2dbe1600a205e476612c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "pegel"
-              }
-            },
-            "Property": "station"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "14dc8566cd17ebd769d1",
-        "field": {
-          "Aggregation": {
-            "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "pegel"
-                  }
-                },
-                "Property": "waterway"
-              }
-            },
-            "Function": 3
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "1390ce1b9009e51387ed",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "wasserstand"
-              }
-            },
-            "Property": "Average Water Level (cm)"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "76a289668d4a40608ed3",
   "position": {
     "x": 644,
     "y": 660,
-    "z": 31,
+    "z": 9000,
     "height": 404,
     "width": 618,
-    "tabOrder": 31
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "donutChart",
@@ -241,37 +241,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "cdd4a3fee31d0b9cc704",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "pegel"
-              }
-            },
-            "Property": "waterway"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "24098c8c1345830099dd",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "pegel"
-              }
-            },
-            "Property": "Active Stations"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

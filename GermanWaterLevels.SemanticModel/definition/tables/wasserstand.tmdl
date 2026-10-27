@@ -45,6 +45,31 @@ table wasserstand
 		formatString: #,##0.00
 		lineageTag: f5421b0a-1f3a-4f30-a4fa-ad4758db4f2a
 
+	measure 'Peak Time' =
+			VAR PeakValue = MAX(wasserstand[value_cm])
+			RETURN
+			    IF(
+			        NOT ISBLANK(PeakValue),
+			        CALCULATE(MIN(wasserstand[timestamp]), wasserstand[value_cm] = PeakValue)
+			    )
+		formatString: dd.MM.yyyy HH:mm
+		lineageTag: d0794157-b37b-4445-86d2-eae442c66806
+
+	measure 'Peak Level (m NHN)' =
+			VAR PeakValue = MAX(wasserstand[value_cm])
+			VAR Datum = SELECTEDVALUE(pegel[pnp_m])
+			RETURN
+			    IF(NOT ISBLANK(PeakValue) && NOT ISBLANK(Datum), Datum + DIVIDE(PeakValue, 100))
+		formatString: #,##0.00
+		lineageTag: 52d7801e-8524-4e4c-82f0-0175cd59a5b7
+
+	measure 'Range in Period (cm)' =
+			VAR Hi = MAX(wasserstand[value_cm])
+			VAR Lo = MIN(wasserstand[value_cm])
+			RETURN IF(NOT ISBLANK(Hi) && NOT ISBLANK(Lo), Hi - Lo)
+		formatString: #,##0
+		lineageTag: 2deb65d7-5c81-4c91-a322-c063706b39c3
+
 	column timestamp
 		dataType: dateTime
 		formatString: General Date

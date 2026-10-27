@@ -8,7 +8,7 @@ Two stages:
                  down.csv into raw/. Idempotent: files already on disk are
                  skipped, so an interrupted run just resumes.
   2. build()   - read every raw/**/*.csv, untangle the German-CSV quirks
-                 (semicolon separator, decimal comma, Latin-1 text, "XXX,XXX"
+                 (semicolon separator, decimal comma, UTF-8 text, "XXX,XXX"
                  placeholders, a header row with a different column count) and
                  write the result to data/.
 
@@ -227,7 +227,11 @@ def _parse_file(path):
       line 1+ : "HH:MM";"value"   - the date is NOT here, it comes from line 0 /
                 the file name; "24:00" means midnight of the following day.
     """
-    text = path.read_bytes().decode("latin-1")       # the file is Latin-1, not UTF-8
+    raw = path.read_bytes()
+    try:
+        text = raw.decode("utf-8")                    # the files are UTF-8 (Latin-1 gave "MÃ\x96LLN")
+    except UnicodeDecodeError:
+        text = raw.decode("latin-1")                  # fallback for any file that is not UTF-8
     rows = [r for r in csv.reader(StringIO(text), delimiter=";", quotechar='"') if r]
     if len(rows) < 2:                                 # header only / empty -> nothing to do
         return []
