@@ -44,20 +44,6 @@
                   "Value": "'Between'"
                 }
               }
-            },
-            "startDate": {
-              "expr": {
-                "Literal": {
-                  "Value": "datetime'2026-10-23T00:00:00'"
-                }
-              }
-            },
-            "endDate": {
-              "expr": {
-                "Literal": {
-                  "Value": "datetime'2026-10-26T00:00:00'"
-                }
-              }
             }
           }
         }
@@ -81,66 +67,6 @@
                     }
                   }
                 }
-              }
-            },
-            "filter": {
-              "filter": {
-                "Version": 2,
-                "From": [
-                  {
-                    "Name": "w",
-                    "Entity": "wasserstand",
-                    "Type": 0
-                  }
-                ],
-                "Where": [
-                  {
-                    "Condition": {
-                      "And": {
-                        "Left": {
-                          "Comparison": {
-                            "ComparisonKind": 2,
-                            "Left": {
-                              "Column": {
-                                "Expression": {
-                                  "SourceRef": {
-                                    "Source": "w"
-                                  }
-                                },
-                                "Property": "timestamp"
-                              }
-                            },
-                            "Right": {
-                              "Literal": {
-                                "Value": "datetime'2026-10-23T00:00:00'"
-                              }
-                            }
-                          }
-                        },
-                        "Right": {
-                          "Comparison": {
-                            "ComparisonKind": 3,
-                            "Left": {
-                              "Column": {
-                                "Expression": {
-                                  "SourceRef": {
-                                    "Source": "w"
-                                  }
-                                },
-                                "Property": "timestamp"
-                              }
-                            },
-                            "Right": {
-                              "Literal": {
-                                "Value": "datetime'2026-10-27T00:00:00'"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]
               }
             }
           }
